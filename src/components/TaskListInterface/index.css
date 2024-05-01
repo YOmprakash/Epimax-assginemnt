@@ -1,13 +1,14 @@
 .task-list-section {
     font-family: Arial, sans-serif;
-
+background-color: #E5FFCC;
+min-height: 100vh;
   }
   .task-list-container{
     padding: 40px 20px;
   }
   
-  h1 {
-    color: #030303;
+  .task-list-container h1 {
+    color: #193300;
 
     font-size: 32px;
 text-align: center;
@@ -26,16 +27,24 @@ margin: 20px 0px;
   input  {
     width: 100%;
     height: 40px;
-   border: #737373 1px solid;
+   border: #193300 1px solid;
    border-radius: 6px;
     padding: 5px;
+    font-size: 18px;
+    padding-left: 10px;
   }
 
   select{
     width: 100px;
     height: 40px;
     border-radius: 6px;
+    gap: 20px;
+  }
 
+  select option{
+    font-size: 16px;
+    margin: 10px 0px;
+    
   }
 
   .form-group{
@@ -45,7 +54,7 @@ margin: 20px 0px;
     margin-top: 20px;
   }
   
-  button {
+  .add-button {
     height: 40px;
     background-color: #0083ff;
     
@@ -81,9 +90,51 @@ margin: 20px 0px;
     align-content: center;
     justify-content: space-between;
   }
-  
+  .error-message {
+    color: red;
+    font-weight: bold;
+    margin-top: 0.5rem;
+  }
   .task-info p {
    
     color: #9b9b9b;
+font-weight: bold;
+    padding: 5px 10px;
   }
-  
+  .task-length{
+    text-align: left;
+    
+    left: 0px;
+    margin-bottom: 10px;
+  }
+  .view-button{
+    background-color: #0083ff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    
+  }
+  @media screen and (min-width: 768px) {
+    .task-list-container{
+      padding: 30px 60px;
+      max-width: 1200px;
+      width: 80%;
+      margin: auto;
+    }
+    .task-list-container h1{
+      font-size: 36px;
+    }
+    input,select{
+      height: 50px;
+    }
+    .task-list{
+      display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
+    }
+    .task-item-card{
+      width: 48%;
+      
+    }
+  }

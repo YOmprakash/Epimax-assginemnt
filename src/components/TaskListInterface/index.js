@@ -1,22 +1,25 @@
 import React, { useState } from 'react';
 import TaskStatusView from '../TaskStatusView';
 import './index.css';
-import { Link } from 'react-router-dom';
+
 const TaskListInterface = () => {
   const [task, setTask] = useState('');
   const [user, setUser] = useState('');
   const [tasks, setTasks] = useState([]);
   const [selectedTask, setSelectedTask] = useState(true);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const users = ['User1', 'User2', 'Team1', 'Team2']; // Replace with your actual users or teams
 
   const handleAddTask = (e) => {
     e.preventDefault();
+    setErrorMessage('')
     if (task && user) {
       setTasks([...tasks, { task, user }]);
       setTask('');
       setUser('');
-      setSelectedTask(false)
+    } else {
+      setErrorMessage('Please enter a task name and select an assignee.');
     }
   };
 
@@ -25,11 +28,11 @@ const TaskListInterface = () => {
     {selectedTask ?   
     <div className='task-list-section'>
     <div className='task-list-container'>
-      <h1>A simple to do list <br/>to manage it all</h1>
+      <h1>A Simple Task List </h1>
       <form onSubmit={handleAddTask}>
         <input
           type="text"
-          placeholder="Enter task"
+          placeholder="Enter task name"
           value={task}
           onChange={(e) => setTask(e.target.value)}
         />
@@ -42,18 +45,22 @@ const TaskListInterface = () => {
             </option>
           ))}
         </select>
-        <button type="submit">Add</button>
+        <button className='add-button' type="submit"> + Add</button>
         </div>
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
       </form>
+      {tasks.length > 0 && <h1 className='task-length'>Tasks: {tasks.length}</h1>}
       <div className='task-list'>
+      
         {tasks.map((task, index) => (
           <div key={index} className='task-item-card'>
             <h2>{task.task}</h2>
             <div className='task-info'>
             <p>{task.user}</p>
-            <Link to={`/taskStatus`}>
-            <button>View</button>
-            </Link>
+           
+            <button className='view-button'
+          onClick={() => setSelectedTask(false)}>View Task</button>
+        
             </div>
            
           </div>
@@ -61,7 +68,7 @@ const TaskListInterface = () => {
       </div>
     </div>
     </div>
-   :<TaskStatusView /> }
+   :<TaskStatusView tasks={tasks}/> }
      </>
   );
 };
